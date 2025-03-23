@@ -9,6 +9,36 @@ document.addEventListener('DOMContentLoaded', function() {
         easing: 'ease-in-out'
     });
 
+    // 移动端导航菜单
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const nav = document.querySelector('nav');
+    
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', function() {
+            this.classList.toggle('active');
+            nav.classList.toggle('active');
+        });
+        
+        // 点击导航链接后关闭菜单
+        const navLinks = document.querySelectorAll('nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    mobileMenuBtn.classList.remove('active');
+                    nav.classList.remove('active');
+                }
+            });
+        });
+        
+        // 点击页面其他区域关闭菜单
+        document.addEventListener('click', function(e) {
+            if (!mobileMenuBtn.contains(e.target) && !nav.contains(e.target) && window.innerWidth <= 768) {
+                mobileMenuBtn.classList.remove('active');
+                nav.classList.remove('active');
+            }
+        });
+    }
+
     // 导航栏活跃状态和滚动效果
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('nav ul li a');
@@ -190,9 +220,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 6000);
         });
         
-        // 初始化轮播
-        setupCarousel();
-        
         // 触摸滑动支持
         let touchStartX = 0;
         let touchEndX = 0;
@@ -230,6 +257,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         }, { passive: true });
+        
+        // 初始化轮播
+        setupCarousel();
     }
     
     // 微信二维码交互
@@ -273,4 +303,7 @@ document.addEventListener('DOMContentLoaded', function() {
             banner.style.backgroundPositionY = `${scrollPosition * 0.5}px`;
         }
     });
+    
+    // 页面加载完成后淡入显示
+    document.body.classList.add('loaded');
 }); 

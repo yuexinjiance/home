@@ -28,6 +28,12 @@ body {
     line-height: 1.7;
     color: #444;
     background-color: var(--white-color);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+body.loaded {
+    opacity: 1;
 }
 
 .container {
@@ -653,16 +659,25 @@ footer {
 /* 响应式设计优化 */
 @media screen and (max-width: 992px) {
     .section {
-        padding: 80px 0;
+        padding: 70px 0;
+    }
+    
+    .section-header h2 {
+        font-size: 2.2rem;
     }
     
     .banner {
-        min-height: 500px;
-        padding: 150px 0 100px;
+        min-height: 450px;
+        padding: 130px 0 100px;
     }
     
     .banner h2 {
-        font-size: 2.8rem;
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+    
+    .banner p {
+        font-size: 1.5rem;
     }
     
     .achievement-card {
@@ -672,76 +687,470 @@ footer {
     .achievement-info h4 {
         font-size: 1.3rem;
     }
+    
+    /* 导航栏调整 */
+    nav ul li a {
+        font-size: 1rem;
+        padding: 8px 10px;
+    }
 }
 
 @media screen and (max-width: 768px) {
+    /* 导航栏移动样式优化 */
+    header {
+        padding: 12px 0;
+    }
+    
     header .container {
         flex-direction: column;
     }
     
     .logo {
+        margin-bottom: 10px;
+    }
+    
+    .logo h1 {
+        font-size: 1.6rem;
+    }
+    
+    nav ul {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    nav ul li {
+        margin: 5px 8px;
+    }
+    
+    nav ul li a {
+        font-size: 0.95rem;
+        padding: 5px 8px;
+    }
+    
+    /* 内容区域调整 */
+    .section {
+        padding: 50px 0;
+    }
+    
+    .section-header {
+        margin-bottom: 40px;
+    }
+    
+    .section-header h2 {
+        font-size: 1.9rem;
         margin-bottom: 15px;
     }
     
-    .section {
-        padding: 60px 0;
+    .line {
+        width: 60px;
+        height: 3px;
     }
     
+    /* 主横幅 */
     .banner {
-        min-height: 450px;
-        padding: 130px 0 80px;
+        min-height: 400px;
+        padding: 100px 0 60px;
+        background-attachment: scroll;
     }
     
     .banner h2 {
-        font-size: 2.4rem;
+        font-size: 2.1rem;
+        margin-bottom: 15px;
     }
     
     .banner p {
+        font-size: 1.3rem;
+        margin-bottom: 30px;
+    }
+    
+    .btn {
+        padding: 12px 25px;
+        font-size: 0.95rem;
+    }
+    
+    /* 关于我们 */
+    .about-content {
+        gap: 30px;
+    }
+    
+    .about-text h3 {
+        font-size: 1.7rem;
+        margin-bottom: 15px;
+    }
+    
+    .about-text p {
+        font-size: 1rem;
+        margin-bottom: 15px;
+    }
+    
+    /* 服务项目 */
+    .service-card {
+        padding: 30px 20px;
+    }
+    
+    .service-icon {
+        width: 70px;
+        height: 70px;
+        margin-bottom: 20px;
+    }
+    
+    .service-icon i {
+        font-size: 1.8rem;
+    }
+    
+    .service-card h3 {
         font-size: 1.4rem;
+        margin-bottom: 12px;
     }
     
-    .contact-info {
-        grid-template-columns: 1fr;
+    .service-card p {
+        font-size: 0.95rem;
     }
     
+    /* 业绩展示 */
     .achievement-card {
         flex: 0 0 calc(100% - 10px);
         margin: 0 5px;
     }
     
     .achievement-image {
-        height: 200px;
+        height: 180px;
+    }
+    
+    .achievement-info {
+        padding: 20px 15px;
+    }
+    
+    .achievement-info h4 {
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+    }
+    
+    .achievement-info p {
+        font-size: 0.95rem;
+        line-height: 1.5;
     }
     
     .achievements-slider {
-        padding-bottom: 70px;
+        padding-bottom: 60px;
+    }
+    
+    .prev-btn, .next-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    /* 我们的优势 */
+    .advantage-item {
+        padding: 25px 15px;
+    }
+    
+    .advantage-icon i {
+        font-size: 2.8rem;
+    }
+    
+    .advantage-item h3 {
+        font-size: 1.4rem;
+        margin-bottom: 12px;
+    }
+    
+    .advantage-item p {
+        font-size: 0.95rem;
+    }
+    
+    /* 联系我们 */
+    .contact-info {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .info-item {
+        padding: 20px 15px;
+    }
+    
+    .info-item i {
+        font-size: 1.7rem;
+        margin-right: 15px;
+    }
+    
+    .info-item h4 {
+        font-size: 1.2rem;
+        margin-bottom: 8px;
+    }
+    
+    .info-item p {
+        font-size: 0.95rem;
+    }
+    
+    /* 微信二维码 */
+    .wechat-qrcode {
+        width: 150px;
+    }
+    
+    /* 减少复杂动画，优化性能 */
+    .achievement-card:hover,
+    .service-card:hover,
+    .advantage-item:hover,
+    .info-item:hover {
+        transform: none;
+    }
+    
+    /* 改用更轻量的过渡效果 */
+    .achievement-card:active,
+    .service-card:active,
+    .info-item:active {
+        transform: scale(0.98);
+    }
+    
+    /* 优化触摸体验 */
+    .wechat-qrcode {
+        transform: translateX(-50%) scale(1);
+        transition: opacity 0.3s ease;
+    }
+    
+    /* 改善表单元素的触摸体验 */
+    input, 
+    select, 
+    textarea, 
+    button {
+        font-size: 16px; /* 避免iOS自动放大 */
+    }
+    
+    /* 优化滚动体验 */
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    /* 减少阴影计算量 */
+    .service-card,
+    .achievement-card,
+    .info-item {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
     }
 }
 
 @media screen and (max-width: 576px) {
+    /* 超小屏幕优化 */
+    header {
+        padding: 10px 0;
+    }
+    
+    .logo h1 {
+        font-size: 1.5rem;
+    }
+    
+    nav ul li {
+        margin: 3px 5px;
+    }
+    
+    nav ul li a {
+        font-size: 0.9rem;
+        padding: 4px 6px;
+    }
+    
+    .section {
+        padding: 40px 0;
+    }
+    
     .section-header h2 {
-        font-size: 2.2rem;
+        font-size: 1.7rem;
     }
     
     .banner {
-        min-height: 400px;
-        padding: 120px 0 70px;
+        min-height: 350px;
+        padding: 80px 0 50px;
     }
     
     .banner h2 {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
     
     .banner p {
-        font-size: 1.2rem;
-        letter-spacing: 2px;
+        font-size: 1.1rem;
+        letter-spacing: 1px;
     }
     
     .btn {
-        padding: 12px 25px;
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .about-text h3 {
+        font-size: 1.5rem;
+    }
+    
+    .service-card h3,
+    .advantage-item h3 {
+        font-size: 1.3rem;
     }
     
     .info-item {
-        padding: 20px;
+        padding: 15px;
     }
+    
+    .copyright p {
+        font-size: 0.9rem;
+    }
+    
+    /* 适配横屏手机 */
+    @media (max-height: 500px) and (orientation: landscape) {
+        .banner {
+            min-height: 300px;
+            padding: 60px 0 40px;
+        }
+        
+        nav ul {
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            padding-bottom: 5px;
+            justify-content: flex-start;
+        }
+        
+        nav ul::-webkit-scrollbar {
+            height: 3px;
+        }
+        
+        nav ul::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 86, 179, 0.3);
+            border-radius: 3px;
+        }
+    }
+}
+
+/* 确保所有图片在移动端有良好表现 */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* 添加触控优化 */
+@media (hover: none) and (pointer: coarse) {
+    /* 针对触摸设备优化按钮大小 */
+    .btn, 
+    .prev-btn, 
+    .next-btn {
+        min-height: 44px; /* 确保触摸目标至少44x44像素 */
+    }
+    
+    /* 移动端点击区域扩大 */
+    nav ul li a {
+        display: inline-block;
+        padding: 8px 12px;
+    }
+    
+    /* 移动端滚动优化 */
+    .achievements-track {
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* 移动菜单按钮样式 */
+.mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 22px;
+    cursor: pointer;
+    z-index: 1001;
+    position: absolute;
+    right: 15px;
+    top: 18px;
+}
+
+.mobile-menu-btn span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-color);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-btn.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.mobile-menu-btn.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-btn.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+@media screen and (max-width: 768px) {
+    .mobile-menu-btn {
+        display: flex;
+    }
+    
+    header .container {
+        position: relative;
+        justify-content: center;
+    }
+    
+    nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--white-color);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease;
+        z-index: 1000;
+    }
+    
+    nav.active {
+        max-height: 300px;
+    }
+    
+    nav ul {
+        flex-direction: column;
+        padding: 10px 0;
+    }
+    
+    nav ul li {
+        margin: 5px 0;
+        width: 100%;
+        text-align: center;
+    }
+    
+    nav ul li a {
+        display: block;
+        padding: 12px 15px;
+        font-size: 1rem;
+    }
+}
+
+/* 添加移动端滑动手势提示 */
+.achievements-slider::after {
+    content: "";
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230056b3'%3E%3Cpath d='M15.5 12c0-1.4-1.1-2.5-2.5-2.5S10.5 10.6 10.5 12s1.1 2.5 2.5 2.5 2.5-1.1 2.5-2.5zm-14 0c0-1.4 1.1-2.5 2.5-2.5S6.5 10.6 6.5 12s-1.1 2.5-2.5 2.5S1.5 13.4 1.5 12zm21 0c0-1.4-1.1-2.5-2.5-2.5S17.5 10.6 17.5 12s1.1 2.5 2.5 2.5 2.5-1.1 2.5-2.5z'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+@media screen and (max-width: 768px) {
+    .achievements-slider::after {
+        opacity: 0.7;
+        visibility: visible;
+        animation: fade-in-out 2s infinite;
+    }
+}
+
+@keyframes fade-in-out {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.7; }
 } 
