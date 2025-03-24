@@ -50,14 +50,18 @@ document.addEventListener('DOMContentLoaded', function() {
             const targetId = this.getAttribute('href');
             const targetSection = document.querySelector(targetId);
             
-            window.scrollTo({
-                top: targetSection.offsetTop - 70,
-                behavior: 'smooth'
-            });
-            
-            // 更新活跃导航项
-            navLinks.forEach(link => link.classList.remove('active'));
-            this.classList.add('active');
+            if (targetSection) {
+                window.scrollTo({
+                    top: targetSection.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+                
+                // 更新活跃导航项
+                navLinks.forEach(link => link.classList.remove('active'));
+                this.classList.add('active');
+            } else {
+                console.warn(`目标锚点 ${targetId} 不存在，请检查HTML中是否缺少对应的ID。`);
+            }
         });
     });
     
