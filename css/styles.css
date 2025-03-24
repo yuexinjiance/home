@@ -934,16 +934,17 @@ nav ul li a.active::after {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    max-width: 900px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
 .contact-info {
     flex: 1;
     min-width: 300px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 30px;
+    justify-content: space-between;
 }
 
 .info-item {
@@ -953,7 +954,8 @@ nav ul li a.active::after {
     border-radius: 10px;
     box-shadow: var(--box-shadow);
     transition: var(--transition);
-    height: 100%;
+    flex: 1;
+    min-width: 250px;
 }
 
 .info-item:hover {
@@ -983,61 +985,6 @@ nav ul li a.active::after {
 .info-item p {
     font-size: 1.05rem;
     line-height: 1.7;
-}
-
-/* 微信二维码样式优化 */
-.wechat-container {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-.wechat-container span {
-    color: var(--primary-color);
-    text-decoration: underline;
-    display: inline-block;
-    margin-top: 5px;
-    font-weight: 600;
-    transition: var(--transition);
-}
-
-.wechat-container:hover span {
-    color: var(--secondary-color);
-}
-
-.wechat-qrcode {
-    position: absolute;
-    left: 50%;
-    bottom: 100%;
-    transform: translateX(-50%) scale(0.9);
-    opacity: 0;
-    background-color: var(--white-color);
-    padding: 12px;
-    border-radius: 10px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    z-index: 100;
-    width: 180px;
-    margin-bottom: 15px;
-    pointer-events: none;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.wechat-qrcode:before {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    margin-left: -10px;
-    border-width: 10px 10px 0;
-    border-style: solid;
-    border-color: var(--white-color) transparent transparent;
-}
-
-.wechat-container:hover .wechat-qrcode {
-    opacity: 1;
-    transform: translateX(-50%) scale(1);
-    pointer-events: auto;
 }
 
 /* 页脚优化 */
@@ -1347,11 +1294,13 @@ footer {
     .contact-info {
         grid-template-columns: 1fr;
         gap: 15px;
+        flex-direction: column;
     }
     
     .info-item {
         padding: 15px;
         border-radius: 8px;
+        width: 100%;
     }
     
     .info-item i {
@@ -1367,15 +1316,6 @@ footer {
     .info-item p {
         font-size: 0.9rem;
         line-height: 1.4;
-    }
-    
-    /* 微信二维码 */
-    .wechat-qrcode {
-        width: 140px;
-    }
-    
-    .wechat-container span {
-        font-size: 0.9rem;
     }
     
     /* 减少复杂动画，优化性能 */
